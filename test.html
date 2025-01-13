@@ -291,8 +291,11 @@
                     </td>
                     <td class="symbol-column"><img class="symbol-img" src="images/symbolks.png" alt="Symbol"></td>
                     <td><img class="bulb-img" src="images/leftarrow.png" alt="Bulb" id="bulb-0"></td>
-                    <td class="button-column"><button id="button1" onclick="handleClick('button1')">बटन दबाएं</button></td>
-                      //<button id="special-button" class="buttoncan" onclick="changeBulbImage(0)">बटन दबाएं</button></td>
+                    <td class="button-column"><button id="button1" class="buttoncan" onclick="changeBulbImage(0)">बटन दबाएं 1</button></td>
+                      <!-- Buttons with unique onclick handlers -->
+			//<button id="button2" class="buttoncan" onclick="changeBulbImage(1)">बटन दबाएं 2</button>
+			//<button id="button3" class="buttoncan" onclick="changeBulbImage(2)">बटन दबाएं 3</button>
+			//<button id="special-button" class="buttoncan" onclick="changeBulbImage(0)">बटन दबाएं</button></td>
                       
                 </tr>
                 <tr>
@@ -542,27 +545,31 @@
     
     <script>
 
-      // Initialize counters for each button
-    let counters = {
-    button1: 0,
-    button2: 0,
-    button3: 0
-    };
+   	// Initialize counters for each button
+	let buttonClickCounts = [0, 0, 0]; // Array to store click counts for each button
 
-    // Function to handle button clicks
-    function handleClick(buttonId) {
-    counters[buttonId]++; // Increment the counter for the clicked button
-    updateCountersDisplay();
+	// Function to handle button click and include existing functionality
+	function changeBulbImage(index) {
+ 	// Increment the click counter for the respective button
+ 	buttonClickCounts[index]++;
+
+    	// Perform the existing functionality (if any)
+    	console.log(`Button ${index + 1} clicked.`);
+
+    	// Update the click counter display
+    	updateClickCounters();
+	}
+
+	// Function to display the updated click counts
+	function updateClickCounters() {
+    	const counterDisplay = document.getElementById("counter-display");
+    	if (counterDisplay) {
+        counterDisplay.innerHTML = `
+            <p>1 ${buttonClickCounts[0]} </p>
+            <p>2 ${buttonClickCounts[1]} </p>
+            <p>3 ${buttonClickCounts[2]} </p>
+        `;
     }
-
-    // Function to update the display of counters
-    function updateCountersDisplay() {
-    const resultDiv = document.getElementById('results'); // Find the results section
-    resultDiv.innerHTML = `
-        <p>Button 1 clicked: ${counters.button1} times</p>
-        <p>Button 2 clicked: ${counters.button2} times</p>
-        <p>Button 3 clicked: ${counters.button3} times</p>
-    `;
 }
         // Create an Audio object for the sound effect
         var beep = new Audio('images/beep.mp3'); // Replace with your sound URL
